@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Cookies from "js-cookie";
 import { useNavigate, useParams, Link } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const NewPassword = () => {
   const { token } = useParams(); // Extract the token from the URL
@@ -10,14 +10,16 @@ const NewPassword = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
 
-  // Save the token to cookies when the component mounts
   useEffect(() => {
     if (token) {
-      Cookies.set('reset_token', token, { expires: 7 }); // Store the token in cookies with a 7-day expiry
+      Cookies.set('reset_token', token, { expires: 7 }); 
+      // Store the token as a string with a 7-day expiry
+      console.log(token);
     } else {
       setError("Invalid or expired token. Please try again.");
     }
   }, [token]);
+  
 
   const handleLogin = () => {
     navigate('/login');
